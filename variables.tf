@@ -39,9 +39,11 @@ variable "task" {
 variable "args" {
   description = "Args"
   type        = "list"
+  default     = []
 }
 
 variable "kwargs" {
   description = "Keyword args"
   type        = "map"
+  default     = {}
 }
