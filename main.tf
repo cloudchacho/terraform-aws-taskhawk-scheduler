@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_event_rule" "rule" {
-  name                = "taskhawk-${var.name}"
+  name                = "taskhawk-${substr(var.name, 0, min(64, length(var.name)))}"
   description         = "${var.description}"
   schedule_expression = "${var.schedule_expression}"
 }
