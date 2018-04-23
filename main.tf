@@ -17,7 +17,7 @@ data "template_file" "input" {
 
 resource "aws_cloudwatch_event_target" "target" {
   rule      = "${aws_cloudwatch_event_rule.rule.name}"
-  target_id = "${"taskhawk-target-${var.name}"}"
+  target_id = "taskhawk-target-${substr(var.name, 0, min(48, length(var.name)))}"
   arn       = "${var.queue == "" ? var.topic : var.queue}"
 
   input_transformer = {
