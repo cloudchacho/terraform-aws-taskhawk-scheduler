@@ -33,3 +33,12 @@ resource "aws_cloudwatch_event_target" "target" {
     input_template = "${replace(data.template_file.input.rendered, "\"\\u003cid\\u003e\"", "<id>")}"
   }
 }
+
+resource "aws_lambda_permission" "allow_cloudwatch_rule" {
+  statement_id  = "AllowExecutionFromCloudwatchRule"
+  action        = "lambda:InvokeFunction"
+  function_name = "${var.function_name}"
+  qualifier     = "${var.function_qualifier}"
+  principal     = "events.amazonaws.com"
+  source_arn    = "${aws_cloudwatch_event_rule.rule.arn}"
+}

@@ -24,7 +24,7 @@ module "taskhawk-dev-myapp" {
 module "taskhawk-dev-myapp-cron-nightly" {
   source      = "Automatic/taskhawk-scheduler/aws"
   queue       = "${module.taskhawk-dev-myapp.default_queue_arn}"
-  name        = "nightly-job"
+  name        = "dev-myapp-nightly-job"
   description = "nightly job"
 
   format_version = "v1.0"
