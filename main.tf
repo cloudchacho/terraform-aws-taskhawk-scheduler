@@ -33,21 +33,3 @@ resource "aws_cloudwatch_event_target" "target" {
     input_template = "${replace(data.template_file.input.rendered, "\"\\u003cid\\u003e\"", "<id>")}"
   }
 }
-
-resource "aws_lambda_permission" "allow_cloudwatch_rule" {
-  count = "${var.queue == "" ? 1 : 0}"
-
-  statement_id = "AllowExecutionFromCloudwatchRule"
-  action       = "lambda:InvokeFunction"
-
-  # XXX workaround for Terraform running validators even though count would evaluate to 0
-  # https://github.com/hashicorp/hil/issues/50
-  function_name = "${var.queue == "" ? var.function_name : "fake"}"
-
-  # XXX workaround for Terraform running validators even though count would evaluate to 0
-  # https://github.com/hashicorp/hil/issues/50
-  qualifier = "${var.queue == "" ? var.function_qualifier : "fake"}"
-
-  principal  = "events.amazonaws.com"
-  source_arn = "${aws_cloudwatch_event_rule.rule.arn}"
-}

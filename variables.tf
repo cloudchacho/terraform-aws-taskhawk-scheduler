@@ -8,16 +8,6 @@ variable "topic" {
   default     = ""
 }
 
-variable "function_name" {
-  description = "Name of the Lambda function (required for lambda apps)"
-  default     = ""
-}
-
-variable "function_qualifier" {
-  description = "ARN of the Lambda function (required for lambda apps)"
-  default     = ""
-}
-
 variable "name" {
   description = "Rule name (must be unique across all taskhawk schedules)"
 }
