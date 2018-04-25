@@ -35,6 +35,8 @@ resource "aws_cloudwatch_event_target" "target" {
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch_rule" {
+  count = "${var.queue == "" ? 1 : 0}"
+
   statement_id  = "AllowExecutionFromCloudwatchRule"
   action        = "lambda:InvokeFunction"
   function_name = "${var.function_name}"
