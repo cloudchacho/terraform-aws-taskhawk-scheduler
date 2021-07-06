@@ -1,7 +1,7 @@
 Taskhawk Scheduler Terraform module
 ===================================
 
-[Taskhawk](https://github.com/Automatic/taskhawk) is a replacement for celery that works on AWS SQS/SNS, while
+[Taskhawk](https://github.com/cloudchacho/taskhawk) is a replacement for celery that works on AWS SQS/SNS, while
 keeping things pretty simple and straight forward. 
 
 This module provides a custom [Terraform](https://www.terraform.io/) module for deploying Taskhawk infrastructure for
@@ -11,7 +11,7 @@ Taskhawk periodic jobs.
 
 ```hcl
 module "taskhawk-dev-myapp" {
-  source = "Automatic/taskhawk-queue/aws"
+  source = "cloudchacho/taskhawk-queue/aws"
   queue  = "DEV-MYAPP"
   iam    = true
 
@@ -22,7 +22,7 @@ module "taskhawk-dev-myapp" {
 }
 
 module "taskhawk-dev-myapp-cron-nightly" {
-  source      = "Automatic/taskhawk-scheduler/aws"
+  source      = "cloudchacho/taskhawk-scheduler/aws"
   queue       = "${module.taskhawk-dev-myapp.default_queue_arn}"
   name        = "dev-myapp-nightly-job"
   description = "nightly job"
@@ -57,8 +57,8 @@ The following templated variables may be used in `headers`, `args`, and `kwargs`
 
 ## Release Notes
 
-[Github Releases](https://github.com/Automatic/terraform-aws-taskhawk-scheduler/releases)
+[Github Releases](https://github.com/cloudchacho/terraform-aws-taskhawk-scheduler/releases)
 
 ## How to publish
 
-Go to [Terraform Registry](https://registry.terraform.io/modules/Automatic/taskhawk-scheduler/aws), and Resync module.
+Go to [Terraform Registry](https://registry.terraform.io/modules/cloudchacho/taskhawk-scheduler/aws), and Resync module.
